@@ -3,8 +3,8 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
-const connectDB = require('./src/config/mongo');
-const { User, Stock, Supplier, Customer, Bill, Category, Unit } = require('./src/models/mongo');
+const connectDB = require('../src/config/mongo');
+const { User, Stock, Supplier, Customer, Bill, Category, Unit } = require('../src/models/mongo');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
