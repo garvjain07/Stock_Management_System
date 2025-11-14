@@ -4,7 +4,7 @@ import axios from 'axios';
 const getBaseURL = () => {
   // In production, use the environment variable or default to the backend URL
   if (import.meta.env.PROD) {
-    return import.meta.env.VITE_API_URL || 'https://your-backend.vercel.app';
+    return import.meta.env.VITE_API_URL || 'https://stock-management-system-backend3.vercel.app';
   }
   // In development, use localhost
   return 'http://localhost:5000';
