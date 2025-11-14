@@ -69,7 +69,7 @@ git push -u origin main
 Click **"Environment Variables"** and add:
 
 ```
-MONGODB_URI=mongodb+srv://Stock_Management:Jain%402000%23stock@stockmanagement.rihszr5.mongodb.net/Stock_Management?retryWrites=true&w=majority
+MONGODB_URI=<your-mongodb-atlas-connection-string>
 
 NODE_ENV=production
 
