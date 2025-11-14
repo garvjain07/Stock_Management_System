@@ -16,6 +16,20 @@ app.use(express.json());
 // Connect to MongoDB
 connectDB();
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Stock Management System API - Server is running',
+    version: '1.0.0',
+    endpoints: {
+      health: '/health',
+      api: '/api',
+      login: '/api/auth/login'
+    }
+  });
+});
+
 // ============================================================================
 // AUTHENTICATION ROUTES
 // ============================================================================
