@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Environment (keep .env.example but ignore actual .env files)
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Testing
+coverage/
+
+# Editor
+.vscode/
+.idea/
+
+# Uploads
+uploads/

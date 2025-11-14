@@ -1,0 +1,35 @@
+{
+  "name": "stock-management-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Stock Maintenance System with Billing (MongoDB)",
+  "main": "server-mongo.js",
+  "scripts": {
+    "start": "node server-mongo.js",
+    "dev": "nodemon server-mongo.js",
+    "seed:admin": "node scripts/seed-admin-only.js",
+    "seed:mongo": "node scripts/seed-mongo.js",
+    "seed:sample": "node scripts/seed-sample-data.js",
+    "drop": "node scripts/drop-collections.js",
+    "reset": "node scripts/drop-collections.js && node scripts/seed-admin-only.js"
+  },
+  "keywords": [
+    "stock-management",
+    "billing",
+    "inventory",
+    "nodejs",
+    "express",
+    "mongodb"
+  ],
+  "author": "Stock Management Team",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^8.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
