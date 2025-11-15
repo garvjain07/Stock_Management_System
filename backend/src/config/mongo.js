@@ -11,7 +11,10 @@ const connectDB = async () => {
     console.log('🔗 Host:', mongoose.connection.host);
   } catch (error) {
     console.error('❌ MongoDB connection error:', error.message);
-    process.exit(1);
+    // Don't exit in serverless environment - let the request fail gracefully
+    if (process.env.NODE_ENV !== 'production') {
+      process.exit(1);
+    }
   }
 };
 
