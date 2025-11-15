@@ -21,13 +21,19 @@ app.use(cors({
 // Parse JSON bodies
 app.use(express.json());
 
-// Explicitly handle OPTIONS requests
-app.options('*', (req, res) => {
+// Add CORS headers to all responses
+app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept');
   res.header('Access-Control-Allow-Credentials', 'true');
-  res.status(200).send();
+  
+  // Handle preflight
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  
+  next();
 });
 
 // Connect to MongoDB
@@ -51,21 +57,8 @@ app.get('/', (req, res) => {
 // AUTHENTICATION ROUTES
 // ============================================================================
 
-// Handle GET request to login endpoint (for testing)
-app.get('/api/auth/login', (req, res) => {
-  res.json({
-    success: false,
-    message: 'Please use POST method to login',
-    method: 'POST',
-    endpoint: '/api/auth/login',
-    body: {
-      username: 'string',
-      password: 'string'
-    }
-  });
-});
-
-app.post('/api/auth/login', async (req, res) => {
+// Login handler function
+const handleLogin = async (req, res) => {
   try {
     console.log('🔐 Login request received');
     const { username, password } = req.body;
@@ -114,7 +107,24 @@ app.post('/api/auth/login', async (req, res) => {
       message: 'Error during login'
     });
   }
+};
+
+// Handle GET request to login endpoint (for testing)
+app.get('/api/auth/login', (req, res) => {
+  res.json({
+    success: false,
+    message: 'Please use POST method to login',
+    method: 'POST',
+    endpoint: '/api/auth/login',
+    body: {
+      username: 'string',
+      password: 'string'
+    }
+  });
 });
+
+// POST login - register on both paths
+app.post('/api/auth/login', handleLogin);
 
 // ============================================================================
 // DASHBOARD ROUTES
