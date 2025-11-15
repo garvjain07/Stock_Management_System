@@ -1,11 +1,19 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
+// Detect environment and set base URL
+const getBaseURL = () => {
+  if (import.meta.env.PROD) {
+    return import.meta.env.VITE_API_URL || 'https://stock-management-system-backend3-a3t0ap1fh.vercel.app';
+  }
+  return 'http://localhost:5000';
+};
+
 // Create axios instance
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: `${getBaseURL()}/api`,
   timeout: 10000,
-})
+});
 
 // Request interceptor to add auth token
 api.interceptors.request.use(
