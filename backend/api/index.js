@@ -34,6 +34,20 @@ app.get('/', (req, res) => {
 // AUTHENTICATION ROUTES
 // ============================================================================
 
+// Handle GET request to login endpoint (for testing)
+app.get('/api/auth/login', (req, res) => {
+  res.json({
+    success: false,
+    message: 'Please use POST method to login',
+    method: 'POST',
+    endpoint: '/api/auth/login',
+    body: {
+      username: 'string',
+      password: 'string'
+    }
+  });
+});
+
 app.post('/api/auth/login', async (req, res) => {
   try {
     console.log('🔐 Login request received');
