@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 // Detect environment and set base URL
 const getBaseURL = () => {
   if (import.meta.env.PROD) {
-    return import.meta.env.VITE_API_URL || 'https://stock-management-system-backend3-a3t0ap1fh.vercel.app';
+    return import.meta.env.VITE_API_URL || 'https://backend-k9k15hcgf-garv-jains-projects-23e7fcf5.vercel.app';
   }
   return 'http://localhost:5000';
 };
