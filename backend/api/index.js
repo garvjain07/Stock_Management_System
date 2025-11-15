@@ -9,32 +9,9 @@ const { User, Stock, Supplier, Customer, Bill, Category, Unit } = require('../sr
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// CORS Configuration - Allow all origins for Vercel
-app.use(cors({
-  origin: true, // This allows all origins
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
-  exposedHeaders: ['Content-Range', 'X-Content-Range']
-}));
-
-// Parse JSON bodies
+// Middleware
+app.use(cors());
 app.use(express.json());
-
-// Add CORS headers to all responses
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  
-  // Handle preflight
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-  
-  next();
-});
 
 // Connect to MongoDB
 connectDB();
@@ -57,8 +34,7 @@ app.get('/', (req, res) => {
 // AUTHENTICATION ROUTES
 // ============================================================================
 
-// Login handler function
-const handleLogin = async (req, res) => {
+app.post('/api/auth/login', async (req, res) => {
   try {
     console.log('🔐 Login request received');
     const { username, password } = req.body;
@@ -107,24 +83,7 @@ const handleLogin = async (req, res) => {
       message: 'Error during login'
     });
   }
-};
-
-// Handle GET request to login endpoint (for testing)
-app.get('/api/auth/login', (req, res) => {
-  res.json({
-    success: false,
-    message: 'Please use POST method to login',
-    method: 'POST',
-    endpoint: '/api/auth/login',
-    body: {
-      username: 'string',
-      password: 'string'
-    }
-  });
 });
-
-// POST login - register on both paths
-app.post('/api/auth/login', handleLogin);
 
 // ============================================================================
 // DASHBOARD ROUTES
