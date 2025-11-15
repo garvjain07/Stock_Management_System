@@ -34,6 +34,9 @@ app.use(cors({
 
 app.use(express.json());
 
+// Handle preflight requests
+app.options('*', cors());
+
 // Connect to MongoDB
 connectDB();
 
