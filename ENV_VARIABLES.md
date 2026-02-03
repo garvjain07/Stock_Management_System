@@ -65,7 +65,7 @@ mongodb+srv://<username>:<password>@<cluster-url>/<database>?retryWrites=true&w=
 
 **Example:**
 ```
-mongodb+srv://Stock_Management:MyP%40ssw0rd@stockmanagement.abc123.mongodb.net/Stock_Management?retryWrites=true&w=majority
+mongodb+srv://<username>:<password>@<cluster>.mongodb.net/Stock_Management?retryWrites=true&w=majority
 ```
 
 **URL Encoding Special Characters:**
